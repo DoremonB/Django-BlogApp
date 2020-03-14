@@ -1,0 +1,24 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    {% for p in posts %}
+    <div class="jumbotron">
+        <h1 style="color: blue;">{{p.title}}</h1>
+        <small>Created By <strong>{{p.author}}</strong> on {{p.date_posted}}</small>
+        <p>{{p.content}}</p>
+        
+        <a href="{% url 'name_blog_commentAdd' pk=p.pk %}">Comments: {{ p.comments.count }}</a><br>
+        <button><a href="{% url 'name_blog_commentAdd' pk=p.pk %}">Add Comment</a></button>
+        <button><a href="{% url 'name_blog_update' p.id %}">Update Me</a></button>
+        <button><a href="{% url 'name_blog_delete' p.id %}">Delete Me</a></button>
+    </div>    
+    <hr size="30">
+    {% empty %}
+    <br>
+      <p>No post yet ?  <a href="{% url 'name_blog_createPost'%}">Create Post</a></p>
+    {% endfor %}
+    
+
+    
+{% endblock %}

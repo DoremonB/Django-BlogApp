@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<form action="" method="POST">    
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="exampleInputEmail1">titleeee</label>
+      <input type="text" class="form-control" name="title" aria-describedby="emailHelp" placeholder="Enter title" value={{p.title}} required>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">contentttt</label>
+        <input type="text" class="form-control" name="content" aria-describedby="emailHelp" placeholder="Enter content" value={{p.content}} required>
+    </div>
+
+
+    
+    
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+{% endblock %}

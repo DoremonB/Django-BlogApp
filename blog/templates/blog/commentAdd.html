@@ -1,0 +1,52 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<!-- POST -->
+
+<div class="jumbotron">
+  <h1 style="color: blue;">{{post.title}}</h1>
+  <small>Created By <strong>{{post.author}}</strong> on {{post.date_posted}}</small>
+  <p>{{post.content}}</p>
+  <a href="{% url 'name_blog_commentAdd' pk=post.pk %}">Comments: {{ post.comments.count }}</a><br>
+  <button><a href="{% url 'name_blog_commentAdd' pk=post.pk %}">Add Comment</a></button>
+  
+</div>  
+
+<!-- -- --> 
+
+<!-- Comment section -->
+
+<div class="jumbotron">
+  <h1 style="color: blue;">Comment Section</h1>
+{% for comment in post.comments.all %}
+  <div class="comment">
+      <div class="date">{{ comment.created_date }}</div>
+      <strong>{{ comment.author }}</strong>
+      <p>{{ comment.text|linebreaks }}</p>
+  </div>
+  <hr size="30">
+{% empty %}
+  <p>No comments here yet :(</p>
+{% endfor %}
+
+</div>
+<!-- -- -->
+
+<!-- Add Comment section -->
+<div class="jumbotron">
+  <h1 style="color: blue;">Add comment</h1>
+<form action="" method="POST">    
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="exampleInputEmail1">Comment:</label>
+      <input type="text" class="form-control" name="cmt" aria-describedby="emailHelp" placeholder="Enter comment" required>
+    </div>
+
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+<!-- -- -->
+
+{% endblock %}

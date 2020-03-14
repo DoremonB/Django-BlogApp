@@ -1,0 +1,39 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    
+
+
+    <div class="media jumbotron">
+        <img style="width: 100px;height: 100px"  alt="thumbnail" class="img-thumbnail pull-left mr-4" src="{{user.profile.image.url}}">
+        <div class="media-body">
+            <h2>Username : {{user.username}}</h2>
+            <p>Bio : {{user.profile.bio}}</p>
+        </div>
+
+    </div>
+
+    
+    <div class="jumbotron">
+    <h1 style="color: blue;">Update Profile</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="exampleInputEmail1">Bio</label>
+          <input type="text" class="form-control" name="bio" aria-describedby="emailHelp" placeholder="Enter bio" required>
+        </div>
+    
+        <div class="form-group">
+            <label for="exampleFormControlFile1">Profile Pic</label>
+            <input type="file" class="form-control-file" name="myfile" id="exampleFormControlFile1" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    </div>
+    
+    
+   
+    
+    
+   
+{% endblock %}
